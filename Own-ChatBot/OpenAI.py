@@ -1,10 +1,6 @@
-from openai import OpenAI
+import openai
 
-openai = OpenAI()
-
-api_key = '#'
-openai.api_key = api_key
-
+openai.api_key = '#'
 
 def generate_response(prompt):
     response = openai.ChatCompletion.create(
@@ -15,11 +11,11 @@ def generate_response(prompt):
 
     return response.choices[0].text.strip()
 
+user_input = input("Start Chat: ")
+while user_input.lower() != 'bye':
+    prompt = f"user: {user_input}\nChatBot:"
+    response = generate_response(prompt)
+    print(response)
+    user_input = input("User: ")
 
-user_input = input("Start Chat:")
-while user_input.lower() != 'by':
-    prompt = f"user: {user_input}\nChatBot"
-    generate_response(prompt)
-    user_input = input("Who are you:")
-
-print("by")
+print("Goodbye!")
